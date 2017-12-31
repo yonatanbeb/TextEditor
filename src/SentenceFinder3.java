@@ -3,25 +3,17 @@ import java.util.Scanner;
 public class SentenceFinder3 
 {
 
-	public static String printCompatibleSentence(String string) 
+	public static String printCompatibleSentence(String text, String word) 
 	{
 		// TODO Auto-generated method stub
 		
 		boolean printSentence = false;
 		boolean lastLetter = true;
 		int wordIndex = 0;
-//		String lastIndex = "";
 		int lastIndex = 0;
 		int lastIndex2 = 0;
-		
-		//Saves text and word
-//		System.out.println("Enter Text: ");		
-//		Scanner userinput1 = new Scanner(System.in);		
-//		Scanner userinput2 = new Scanner(System.in);		
-		String text = MainWindow.CreateContents(innertopleft.getText().trim());
-//		System.out.println("Word: ");		
-		String word = MainWindow.CreateContents(text.getText().trim());
-				
+		String finalSentence = "";
+
 				
 		//Goes through all the words finds if chars are compatible
 				for(int i=0;i<text.length();i++)
@@ -67,16 +59,14 @@ public class SentenceFinder3
 						{
 							for(int z = (text.length()-lastIndex-1);z<lastIndex+1;z++)
 							{
-								System.out.print(text.charAt(z));
-							}
-							System.out.println("\n" + lastIndex2);
-							
+								finalSentence += text.charAt(z);
+							}							
 						}
 		
 						printSentence = false;
 					}	
 				}
-				return word;
+				return finalSentence;
 	}
 }
 

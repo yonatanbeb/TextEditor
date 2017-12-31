@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class SentenceFinder2 
 {
 
@@ -10,8 +9,8 @@ public class SentenceFinder2
 		boolean printSentence = false;
 		boolean lastLetter = true;
 		int wordIndex = 0;
-		String lastSentence = "";
-
+		int lastIndex = 0;
+		int lastIndex2 = 0;
 		
 		//Saves text and word
 		System.out.println("Enter Text: ");		
@@ -25,27 +24,30 @@ public class SentenceFinder2
 		//Goes through all the words finds if chars are compatible
 				for(int i=0;i<text.length();i++)
 				{
-					lastSentence += text.charAt(i);
-					
+					lastIndex = lastIndex2;
 					if (text.charAt(i) != ' ' && text.charAt(i) != '.')
 					{
 						if(wordIndex >= word.length() )
 						{
-							lastLetter = false;
-							
+							lastLetter = false;	
 						}
+
 						else
 						{
 							if(text.charAt(i) != word.charAt(wordIndex))
 							{
 								lastLetter = false;
 							}
+							
 						}
 						wordIndex++;
 					}
 					
+					
 					else
 					{ 
+						
+						
 						if(lastLetter == true)
 						{
 							printSentence = true;
@@ -54,20 +56,24 @@ public class SentenceFinder2
 						wordIndex = 0;
 						
 					}
-					if(text.charAt(i) == '.'){
+					
+					if(text.charAt(i) == '.')
+					{
 						if(printSentence == true)
 						{
-						System.out.println(lastSentence);
-						printSentence = false;
+							for(int z = (text.length()-lastIndex-1);z<lastIndex+1;z++)
+							{
+								System.out.print(text.charAt(z));
+							}							
 						}
-					
-					}
-				}
-		}
+						if(printSentence != true)
+						{
+							lastIndex2 = i - lastIndex;
+						}
+		
+						printSentence = false;
+					}	
+				}				
+	
 }
-
-
-/*problem: lastSentence holds all text((lastSentenc += word.charAt(i)) line 27) once printSentence
- checks out true all text is printed instead of just the sentences containing the selected word*/
-
-//make program work without variable lastSentence can use any variable other than string
+}

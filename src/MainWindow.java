@@ -140,6 +140,7 @@ public class MainWindow {
 							
 							Button Clear = new Button(radioGroup, SWT.PUSH);
 							Clear.setText("Reset");
+						
 					
 						//Creates the inner bottom left Text(holds in it the MULTI text area)
 							StyledText innerbottomleft = new StyledText(bottomComposite, SWT.MULTI);
@@ -163,59 +164,37 @@ public class MainWindow {
 										if(!text.getText().trim().isEmpty()){
 											if(wordDefineButton.getSelection()){
 												definitions = WordDefine.printWordDefine(text.getText().trim());
+												text.setText(definitions);
 									
 											}
-										}
-										text.setText(definitions);
-										if(Clear.getSelection()){
-											text.setText(" ");
-										}
-										text.setCaretOffset(0);
-										
-										
-							innerbottomleft.addKeyListener(new KeyAdapter(){
-								public void keyPressed(KeyEvent e){
 											
-										if(e.keyCode == SWT.CR){
-											//innerbottomleft.setText("");
-													
-											StyledText text = (StyledText) e.getSource();
-											if(!text.getText().trim().isEmpty()){
-												if(SearchSentence.getSelection()){
-													sentence = SentenceFinder3.printCompatibleSentence(innertopleft.getText().trim());
+											if(SearchSentence.getSelection()){
 												
-												}
+												sentence = SentenceFinder3.printCompatibleSentence(innertopleft.getText().trim(),
+																									text.getText().trim());
+												text.setText(sentence);
+											
 											}
-											text.setText(sentence);
-											if(Clear.getSelection()){
-													text.setText(" ");
+											
 										}
-										text.setCaretOffset(0);							
-										
-										
-										
-										
-										}
-	
-								}
+									
+										text.setCaretOffset(0);
+						}
+					}
+				});
+							
+							Clear.addListener(SWT.Selection, new Listener() {
+							      public void handleEvent(Event e) {
+							          switch (e.type) {
+							          case SWT.Selection:
+							        	  innerbottomleft.setText("");
+							        	  break;
+							          }
+							      }
 							});
-	}
-}
-
-	});
-	}
-}
-						
-
-	
-					
-		
-
-
-
-
-
-
+							
+			}
+		}
 
 //copy drive version to new class(add alterations)
 //Stop when when text is null
